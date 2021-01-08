@@ -1,0 +1,10 @@
+﻿@model ErrorData
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1>Error occurred while processing the request</h1>
+<p>Error status code: @Model.statusCode</p>
+<p>Error message: @Model.errorMessage</p>
+<a class="btn btn-dark" asp-controller="Home" asp-action="Index">Go to home page</a>
+

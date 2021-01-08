@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Resource>
+@{
+    ViewData["Title"] = "List of resources";
+}
+
+<h1>List of resources</h1>
+<a class="btn btn-dark m-2" asp-controller="Resources" asp-action="AddResource">Add Resource</a>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="List-header">
+            <th scope="col">Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Middle Name</th>
+            <th scope="col">Hire Date</th>
+            <th scope="col">Term Date</th>
+            <th scope="col" width="200px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var resource in @Model)
+        {
+            <tr>
+                <th scope="row">@resource.ResourceId</th>
+                <td>@resource.Firstname</td>
+                <td>@resource.Lastname</td>
+                <td>@resource.Middlename</td>
+                <td>@resource.Hiredate.ToShortDateString()</td>
+                <td>
+                    @if (@resource.Termdate.HasValue)
+                    {
+                        @resource.Termdate.Value.ToShortDateString();
+                    }
+                </td>
+                <td style="text-align:center">
+                    <form method="post" asp-controller="Resources" asp-action="DeleteResource" asp-route-id="@resource.ResourceId">
+                        
+                        <a class="btn btn-dark m-2" asp-controller="Resources" asp-action="EditResource" asp-route-resourceId="@resource.ResourceId">Edit</a>
+                        <button type="button" class="btn btn-dark m-2" data-toggle="modal" data-target="#exampleModal_@resource.ResourceId">
+                            Delete
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal_@resource.ResourceId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-danger text-light">
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation Window</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this resource - @resource.Firstname @resource.Lastname?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+             
+        }
+        </tbody>
+    </table>
+
+
+
+
+

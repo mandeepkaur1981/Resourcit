@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" 
+          integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" 
+          crossorigin="anonymous">
+    <link href="~/css/site1.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-dark navbar-bg-override">
+
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"> <a class="nav-link" asp-controller="Home" asp-action="Index">Resourcit <span class="sr-only">(current)</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" asp-controller="Resources" asp-action="Index">Resources</a> </li>
+                <li class="nav-item"> <a class="nav-link" asp-controller="Projects" asp-action="Index">Projects</a> </li>
+
+            </ul>
+            <form class="form-inline my-2 my-md-0"> </form>
+        </div>
+        <a href="#menu-toggle" id="menu-toggle" class="navbar-brand"><span class="navbar-toggler-icon"></span></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    </nav>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"> <a asp-controller="Home" asp-action="Index">Resourcit Home Page</a> </li>
+                <li> <a asp-controller="Resources" asp-action="Index">Resources</a> </li>
+                <li> <a asp-controller="Projects" asp-action="Index">Projects</a> </li>
+                <li> <a href="#">About Us</a> </li>
+                <li> <a href="#">Contact Us</a> </li>
+            </ul>
+        </div> <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div>
+                    @RenderBody()
+                </div>
+            </div>
+        </div> <!-- /#page-content-wrapper -->
+    </div> <!-- /#wrapper -->
+    <!-- Bootstrap core JavaScript -->
+    
+</body>
+</html>
+
+<script>
+    $(function () {
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+
+        $(window).resize(function (e) {
+            if ($(window).width() <= 768) {
+                $("#wrapper").removeClass("toggled");
+            } else {
+                $("#wrapper").addClass("toggled");
+            }
+        });
+    });</script>
